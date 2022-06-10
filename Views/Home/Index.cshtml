@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
+<div class="card">
+    <div class="card-header bg-dark py-0">
+        <h5 class="card-title text-white" style="margin-bottom:5px;margin-top:5px"> Reports</h5>
+    </div>
+    <div class="card-body">
+        <div class="col-12 table-responsive" id="bindTableHistory">
+            <div class="spinner-border text-primary mr-2" role="status">
+                <span class="sr-only">Loading...</span>
+            </div> Loading....
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const bindData = () => {
+                var getUrl = `@Url.Action("Detail","Home")`;
+
+                $("#bindTableHistory").load(getUrl,
+                    function (statusTxt) {
+                        if (statusTxt == "error") {
+                            alert("Error occured durring process. Please contact administrator")
+                        }
+                        var table = $("#historyTable").DataTable({
+                            "order": [[1, "asc"]],
+                            "pageLength": 50,
+                            "orderCellsTop": true,
+                            "fixedHeader": true,
+                            //initComplete: function () {
+                            //var api = this.api();
+                            //    $('.filterhead', api.table().header()).each(function (i) {
+                            //        var title = $(this).text();
+                            //        var column = api.column(i);
+
+                            //        if (title === 'Status') {
+                            //            var select = $('<select style="width: 100px;"><option value="" >Search ' + title + '</option></select>')
+                            //                .appendTo($(this).empty())
+                            //                .on('change', function () {
+                            //                    var val = $.fn.dataTable.util.escapeRegex(
+                            //                        $(this).val()
+                            //                    );
+                            //                    column
+                            //                        .search(val ? '^' + val + '$' : '', true, false)
+                            //                        .draw();
+                            //                });
+                            //            select.append('<option value="' + 'Draft' + '">' + 'Draft' + '</option>');
+                            //            select.append('<option value="' + 'Auditee Assign' + '">' + 'Auditee Assign' + '</option>');
+                            //            select.append('<option value="' + 'Auditor Verify' + '">' + 'Auditor Verify' + '</option>');
+                            //            select.append('<option value="' + 'HSE Verify' + '">' + 'HSE Verify' + '</option>');
+                            //            select.append('<option value="' + 'HSE Mgr Verify' + '">' + 'HSE Mgr Verify' + '</option>');
+                            //            select.append('<option value="' + 'Process Task' + '">' + 'Process Task' + '</option>');
+                            //            select.append('<option value="' + 'Auditor Verify Task' + '">' + 'Auditor Verify Task' + '</option>');
+                            //            select.append('<option value="' + 'HSE Verify Task' + '">' + 'HSE Verify Task' + '</option>');
+                            //            select.append('<option value="' + 'HSE Mgr Verify Task' + '">' + 'HSE Mgr Verify Task' + '</option>');
+                            //            select.append('<option value="' + 'QA Verify' + '">' + 'QA Verify' + '</option>');
+                            //            select.append('<option value="' + 'QA Mgr Verify' + '">' + 'QA Mgr Verify' + '</option>');
+                            //            select.append('<option value="' + 'QA Verify Task' + '">' + 'QA Verify Task' + '</option>');
+                            //            select.append('<option value="' + 'QA Mgr Verify Task' + '">' + 'QA Mgr Verify Task' + '</option>');
+                            //            select.append('<option value="' + 'Cancel' + '">' + 'Cancel' + '</option>');
+                            //            select.append('<option value="' + 'Closed' + '">' + 'Closed' + '</option>');
+                            //        }
+                            //        else if (title === 'Report No.') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else if (title === 'Subject') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else if (title === 'Register By') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else if (title === 'Register Date') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else if (title === 'Auditor Name') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else if (title === 'Auditee Name') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else if (title === 'Action Task Owner') {
+                            //            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                            //            $('input', this).on('keyup change', function () {
+                            //                if (table.column(i).search() !== this.value) {
+                            //                    table
+                            //                        .column(i)
+                            //                        .search(this.value)
+                            //                        .draw();
+                            //                }
+                            //            });
+                            //        }
+                            //        else {
+                            //            var select = $('<select><option value="">Search ' + title + '</option></select>')
+                            //                .appendTo($(this).empty())
+                            //                .on('change', function () {
+                            //                    var val = $.fn.dataTable.util.escapeRegex(
+                            //                        $(this).val()
+                            //                    );
+                            //                    column
+                            //                        .search(val ? '^' + val + '$' : '', true, false)
+                            //                        .draw();
+                            //                });
+                            //            column.data().unique().sort().each(function (e, j) {
+                            //                select.append('<option value="' + e + '">' + e + '</option>');
+                            //            });
+                            //        }
+                            //});
+                            //}
+                        });
+                    }
+                );
+            }
+
+            bindData();
+
+        });
+    </script>
+}

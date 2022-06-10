@@ -1,0 +1,64 @@
+﻿@model Tuple<VerifyReference, ReportHeader>
+@{
+    Layout = null;
+
+    
+}
+
+<table class="table table-sm table-striped table-valign-middle">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Action</th>
+            <th>Team member</th>
+            <th>Date Start</th>
+            <th>Metric</th>
+            <th>% Eff.</th>
+            <th>Part ID</th>
+            <th>Date Finish</th>
+            <th>Add/Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Item2.D0s.Count > 0)
+        {
+            @foreach (var item in Model.Item2.D0s)
+            {
+                @foreach (var itemD0 in item.D0_EmergencyRespondActions)
+                {
+                    <tr>
+                        <td>....</td>
+                        <td><textarea class="form-control form-control-sm" rows="1"></textarea></td>
+                        <td>
+                            <select class="form-control form-control-sm">
+
+                                @foreach (var eitem in Model.Item1.EmpInfos.Where(w => !string.IsNullOrWhiteSpace(w.EmpEmail)))
+                                {
+                                    @: <option value="@eitem.EmpId" @(itemD0.TeamMemberId == eitem.EmpDomainId ? "selected" : "")
+                                                @: data-domainid="@eitem.EmpDomainId"
+                                                @: data-name="@eitem.EmpFullnameEN"
+                                                @: data-email="@eitem.EmpEmail"
+                                                @: data-position="@eitem.EmpPositionName"
+                                                @: data-section="@eitem.EmpSectionName"
+                                                @: data-department="@eitem.EmpDepartmentName">
+                                        @:     @eitem.EmpFullnameEN
+                                    @: </option>
+                                }
+                            </select>
+                        </td>
+                        <td>....</td>
+                        <td>....</td>
+                        <td>....</td>
+                        <td>....</td>
+                        <td>....</td>
+                        <td>....</td>
+                    </tr>
+                }
+
+            }
+
+
+        }
+
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+﻿@model _8DSystem.Models.RefCauseSource
+@{
+    Layout = "~/Views/Shared/_LayoutSetting1.cshtml";
+}
+
+<h1>Function</h1>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card">
+                <div class="card-header"><strong>Edit</strong></div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input class="form-control" type="text"  asp-for="Description" value="@Model.Description" required />
+
+
+                    </div>
+                    <div class="form-group">
+                        <div class="icheck-success d-inline">
+                            <input type="checkbox" asp-for="Active" name="Active"   />
+                            <label for="Active" class="font-weight-normal">
+                                @Html.DisplayNameFor(model => model.Active)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-secondary" asp-action="Index"> Back </a>
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>

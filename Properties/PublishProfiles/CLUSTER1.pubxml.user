@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>\\thsatitsv026\c$\inetpub\wwwroot\wwwroot-9012\CLUSTER1</_PublishTargetUrl>
+    <History>True|2022-06-06T10:20:00.8046656Z;True|2022-06-06T00:47:09.8827956+07:00;True|2022-06-06T00:42:27.8179465+07:00;</History>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<_8DSystem.Models.RefCauseSource>
+@{
+    Layout = "~/Views/Shared/_LayoutSetting1.cshtml";
+}
+
+<h1>PCA/PA Status</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <a asp-action="Create" style="text-decoration: none;"> <i class="fas fa-plus"></i> [Create New]</a>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-striped table-valign-middle table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th>Description</th>
+                            <th>Active</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+
+                                <td>@m.Description</td>
+                                <td class="text-center">
+                                    <div class="icheck-success d-inline">
+                                        <input type="checkbox" id="Active" name="Active" @(m.Active == true ? "checked" : "") disabled>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" @(m.Active == true ? "checked" : "") disabled />
+                                            <label for="Active" class="font-weight-normal">
+                                                Active
+                                            </label>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@m.Id" id="btnEdit" class="btnEdit" data-id="@m.Id"><i class="fa fa-edit "></i></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</div>

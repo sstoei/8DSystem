@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ReportHeader>
+@{ Layout = null;
+}
+
+<table id="historyTable" class="table table-sm table-hover table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th class="text-center" style="white-space: nowrap;" >Status</th>
+            <th class="text-center" style="white-space: nowrap;">Report No</th>
+            <th class="text-center" style="white-space: nowrap;">NCR Code</th>
+            <th class="text-center" style="white-space: nowrap;">Subject</th>
+            <th class="text-center" style="white-space: nowrap;">Date Open</th>
+            <th class="text-center" style="white-space: nowrap;">Leader</th>
+            <th class="text-center" style="white-space: nowrap;">Date D0</th>
+            <th class="text-center" style="white-space: nowrap;">Date D1</th>
+            <th class="text-center" style="white-space: nowrap;">Date D2</th>
+            <th class="text-center" style="white-space: nowrap;">Date D3</th>
+            <th class="text-center" style="white-space: nowrap;">Date D4</th>
+            <th class="text-center" style="white-space: nowrap;">Date D5</th>
+            <th class="text-center" style="white-space: nowrap;">Date D6</th>
+            <th class="text-center" style="white-space: nowrap;">Date D7</th>
+            <th class="text-center" style="white-space: nowrap;">Date D8</th>
+            <th class="text-center" style="white-space: nowrap;">Date Closed</th>
+            <th class="text-center" style="white-space: nowrap;">Approver</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var d1 = item.D1s.ToList();
+            var d2 = item.D2s.ToList();
+            var d8 = item.D8s.ToList();
+            <tr>
+                <td style="white-space: nowrap;text-align:center;"><span class="badge badge-@item.WorkFlow.RefStatus.Behavior">@item.WorkFlow.RefStatus.Name</span></td>
+                <td style="white-space: nowrap;"><a asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">@item.Code</a> </td>
+                <td style="white-space: nowrap;">@item.NcrNo</td>
+                <td style="overflow-wrap: anywhere;">
+                    @if (d2.Count > 0)
+                    {
+                        @d2[0].D2_DefineCustomerExperience;
+
+                    }
+
+                </td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateOpened</span>@(item.DateOpened != null? Convert.ToDateTime(item.DateOpened).ToString("dd-MMM-yyyy"):"") </td>
+                <td style="white-space: nowrap;">
+                    @if (d1.Count > 0)
+                    {
+                        //
+                        int c = 1;
+                        @foreach (var leader in d1.Where(w => w.RefFunctionId == 2))
+                        {
+                    <span>@(c++).</span>  @(leader.D1_EmployeeName);
+                            <br />
+                           
+                        }
+                    }
+                </td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD0</span>@(item.DateClosureD0!=null? Convert.ToDateTime(item.DateClosureD0).ToString("dd-MMM-yyyy"):"") </td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD1</span>@(item.DateClosureD1!=null? Convert.ToDateTime(item.DateClosureD1).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD2</span>@(item.DateClosureD2!=null? Convert.ToDateTime(item.DateClosureD2).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD3</span>@(item.DateClosureD3!=null? Convert.ToDateTime(item.DateClosureD3).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD4</span>@(item.DateClosureD4!=null? Convert.ToDateTime(item.DateClosureD4).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD5</span>@(item.DateClosureD5!=null? Convert.ToDateTime(item.DateClosureD5).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD6</span>@(item.DateClosureD6!=null? Convert.ToDateTime(item.DateClosureD6).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD7</span>@(item.DateClosureD7!=null? Convert.ToDateTime(item.DateClosureD7).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosureD8</span>@(item.DateClosureD8!=null? Convert.ToDateTime(item.DateClosureD8).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;"><span class="d-none">@item.DateClosed</span>@(item.DateClosed != null? Convert.ToDateTime(item.DateClosed).ToString("dd-MMM-yyyy"):"")</td>
+                <td style="white-space: nowrap;">
+                    @if (d8.Count > 0)
+                    {
+                        var d8b = d8[0].D8_Bs.ToList();
+                        if (d8b.Count > 0) {
+                            @d8b[0].Signature1;
+                        }
+                    }
+                </td>
+            </tr>
+
+        }
+
+
+    </tbody>
+</table>
