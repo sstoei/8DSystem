@@ -13,6 +13,7 @@ using System.DirectoryServices.AccountManagement;
 
 namespace _8DSystem.Controllers
 {
+    [AllowAnonymous]
     public class AuthController : Controller
     {
         private readonly CoreContext _context;
@@ -24,14 +25,14 @@ namespace _8DSystem.Controllers
         }
         public IActionResult Login(string ReturnUrl)
         {
-          //  string domainName = User.Identity.Name;
+            string domainName = User.Identity.Name;
             //string domainName = "SAT\\thanadol.a"; //User.Identity.Name;
          //  string domainName = "SAT\\sarinya.p"; //User.Identity.Name;
-           string domainName = "SAT\\anat"; //User.Identity.Name;
+         //  string domainName = "SAT\\anat"; //User.Identity.Name;
             if (string.IsNullOrWhiteSpace(domainName))
             {
-                return Redirect("http://192.168.99.46:9012/");
-                //return Redirect("http://localhost:25874");
+               // return Redirect("http://192.168.99.46:9012/");
+                return Redirect("http://localhost:25874");
             }
             var config = Configuration.GetSection("SecurityGroup");
             var AdminGroup = config["AdminGroup"];

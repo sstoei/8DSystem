@@ -37,7 +37,7 @@
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     </li>
                     <li class="nav-item d-none d-sm-inline-block mr-1 ">
-                        <button type="button" class="nav-link btn btn-sm btn-primary text-white @((Model.WorkFlowId != 4 && Model.WorkFlowId != 5 && Model.WorkFlowId != 3) && Model.WorkFlow.ActionId.Contains(User.Identity.Name.Split('\\').Last())?"":"d-none")" id="btnSave" name="btnSave"><i class="fa fa-save"></i> Save</button>
+                        <button type="button" class="nav-link btn btn-sm btn-primary text-white @((Model.WorkFlowId != 4 && Model.WorkFlowId != 5 && Model.WorkFlowId != 3) && Model.WorkFlow.ActionId.Contains(User.Identity.Name.Split('\\').Last())?"":"d-none")" id="btnSave" name="btnSave" value="Save"><i class="fa fa-save"></i> Save</button>
 
                     </li>
                     <li class="nav-item d-none d-sm-inline-block ">

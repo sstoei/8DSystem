@@ -478,7 +478,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <a href="javascript:void(0)" class="removeAttender" data-id="@rowD0">
+                                                            <a href="javascript:void(0)" class="removeAction" data-id="@rowD0">
                                                                 <i class="fas fa-minus text-danger"></i>
                                                             </a>
 
@@ -556,7 +556,7 @@
                                 {
                                     <div class="row">
                                         <a asp-controller="Home" asp-action="ViewfileD0" asp-route-reportId='@item.ReportHeaderId' asp-route-fileid='@file.Id'>@(ff++). @file.ContentName</a>
-                                        <a asp-controller="Home" asp-action="DeleteFileD0" asp-route-reportId='@item.ReportHeaderId' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                        <a asp-controller="Home" asp-action="DeleteFileD0" asp-route-reportId='@item.ReportHeaderId' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                                     </div>}
                             }
                         </div>
@@ -715,7 +715,7 @@
                                                 }
                                                 else
                                                 {
-                                                    <a href="javascript:void(0)" class="removeAttender_D1" data-id="@rowD1">
+                                                    <a href="javascript:void(0)" class="removeAction_D1" data-id="@rowD1">
                                                         <i class="fas fa-minus text-danger"></i>
                                                     </a>
 
@@ -932,7 +932,7 @@
                                         {
                                             <div>
                                                 <a asp-controller="Home" asp-action="Viewfile_D2AttachmentRecurrings" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(f++). @file.ContentName</a>
-                                                <a asp-controller="Home" asp-action="DeleteFile_D2AttachmentRecurrings" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                                <a asp-controller="Home" asp-action="DeleteFile_D2AttachmentRecurrings" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                                             </div>}
                                     }
                                 </div>
@@ -966,7 +966,7 @@
                                         {
                                             <div>
                                                 <a asp-controller="Home" asp-action="Viewfile_D2AttachmentFailures" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(i++). @file.ContentName</a>
-                                                <a asp-controller="Home" asp-action="DeleteFile_D2AttachmentFailures" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                                <a asp-controller="Home" asp-action="DeleteFile_D2AttachmentFailures" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                                             </div>}
                                     }
                                 </div>
@@ -1094,6 +1094,7 @@
                                 {
                                     <div class="text-center">
                                         <img src="data:image/jpeg;base64,@Convert.ToBase64String(file.Content)" class="img-fluid mb-2 p-3" style="width:300px;height:300px;" />
+                                      
                                     </div>
 
                                 }
@@ -1130,7 +1131,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D2Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(y++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D2Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D2Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>}
                     }
                     <!-- /.card-body -->
@@ -1258,7 +1259,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <a href="javascript:void(0)" class="removeAttender_D3" data-id="@rowD3">
+                                                            <a href="javascript:void(0)" class="removeAction_D3" data-id="@rowD3">
                                                                 <i class="fas fa-minus text-danger"></i>
                                                             </a>
 
@@ -1380,7 +1381,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D3Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(w++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D3Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D3Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>
                         }
                     }
@@ -1481,7 +1482,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <a href="javascript:void(0)" class="removeAttender_D4" data-id="@rowD4">
+                                                        <a href="javascript:void(0)" class="removeAction_D4" data-id="@rowD4">
                                                             <i class="fas fa-minus text-danger"></i>
                                                         </a>
 
@@ -1786,7 +1787,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D4Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(d4++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D4Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D4Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>
                         }
 
@@ -1887,7 +1888,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <a href="javascript:void(0)" class="removeAttender_D5" data-id="@rowD5">
+                                                        <a href="javascript:void(0)" class="removeAction_D5" data-id="@rowD5">
                                                             <i class="fas fa-minus text-danger"></i>
                                                         </a>
 
@@ -2010,7 +2011,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D5Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(d5++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D5Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D5Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>
                         }
                     }
@@ -2152,7 +2153,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <a href="javascript:void(0)" class="removeAttender_D6" data-id="@rowD6">
+                                                        <a href="javascript:void(0)" class="removeAction_D6" data-id="@rowD6">
                                                             <i class="fas fa-minus text-danger"></i>
                                                         </a>
 
@@ -2319,7 +2320,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D6Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(d6++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D6Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D6Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>
                         }
                     }
@@ -2449,7 +2450,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <a href="javascript:void(0)" class="removeAttender_D7A" data-id="@rowD7A">
+                                                        <a href="javascript:void(0)" class="removeAction_D7A" data-id="@rowD7A">
                                                             <i class="fas fa-minus text-danger"></i>
                                                         </a>
 
@@ -2635,7 +2636,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <a href="javascript:void(0)" class="removeAttender_D7B" data-id="@rowD7B">
+                                                        <a href="javascript:void(0)" class="removeAction_D7B" data-id="@rowD7B">
                                                             <i class="fas fa-minus text-danger"></i>
                                                         </a>
 
@@ -3573,7 +3574,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D7Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(d7++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D7Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D7Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>
                         }
                     }
@@ -3624,7 +3625,7 @@
                                             {
                                                 <tr class="actionTask_D8A" id="actionTask_D8A_@rowD8A" data-id="@rowD8A">
                                                     <td>
-                                                        1
+                                                        @rowD8A
                                                     </td>
                                                     <td class="form-group">
                                                         <input type="date" class="form-control form-control-sm" id="D8_PlanDateValue_@rowD8A" value="@(itemD8A.PlanDate==null?null:Convert.ToDateTime(itemD8A.PlanDate).ToString("yyyy-MM-dd"))" />
@@ -3643,7 +3644,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <a href="javascript:void(0)" class="removeAttender_D7A" data-id="@rowD8A">
+                                                            <a href="javascript:void(0)" class="removeAction_D8A" data-id="@rowD8A">
                                                                 <i class="fas fa-minus text-danger"></i>
                                                             </a>
 
@@ -4017,7 +4018,7 @@
                         {
                             <div class="row">
                                 <a asp-controller="Home" asp-action="Viewfile_D8Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id'>@(d8++). @file.ContentName</a>
-                                <a asp-controller="Home" asp-action="DeleteFile_D8Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;"><i class="fa fa-trash-alt"></i>Delete</a>
+                                <a asp-controller="Home" asp-action="DeleteFile_D8Attachments" asp-route-reportId='@Model.Id' asp-route-fileid='@file.Id' style="padding-left:10px;color:red;" class="@(User.IsInRole("Admin")?"":"d-none")"><i class="fa fa-trash-alt"></i>Delete</a>
                             </div>
                         }
                     }
@@ -4683,6 +4684,66 @@ ${row}
                 });
                 $('.select2').select2();
             });
+
+            $(`.removeAction`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_${getId}`).remove();
+            });
+             $(`.removeAction_D1`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D1_${getId}`).remove();
+             });
+            $(`.removeAction_D3`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D3_${getId}`).remove();
+            });
+            $(`.removeAction_D4`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D4_${getId}`).remove();
+            });
+            $(`.removeAction_D5`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D5_${getId}`).remove();
+            });
+            $(`.removeAction_D6`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D6_${getId}`).remove();
+            });
+            $(`.removeAction_D7A`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D7A_${getId}`).remove();
+            });
+            $(`.removeAction_D7B`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D7B_${getId}`).remove();
+            });
+          
+
+
+            $(`.removeAction_D8A`).click(function (e) {
+                e.stopImmediatePropagation();
+                var getId = $(this).data("id");
+
+                $(`#actionTask_D8A_${getId}`).remove();
+            });
+         
+
             const Toast = Swal.mixin({
                 toast: true,
                 position: "center",
@@ -4696,7 +4757,7 @@ ${row}
                 $("button[name=btnSave]").prop("disabled", true);
                 $("button[name=btnSubmit]").prop("disabled", true);
                 $("button[name=btnMgrSubmit]").prop("disabled", true);
-                UpdateData(e,2);
+                UpdateData(e,2,"save");
 
             });
             $("#btnSubmit").click((e) => {
@@ -4706,7 +4767,7 @@ ${row}
                     $("button[name=btnSubmit]").prop("disabled", true);
                     $("button[name=btnMgrSubmit]").prop("disabled", true);
 
-                    UpdateData(e, 3);
+                    UpdateData(e, 3,"");
                    // $("#btnSubmit").prop("disabled", true);
                   //  alert("CALL");
                 }
@@ -4723,10 +4784,10 @@ ${row}
                      $(`input[name='D8_B_Review']:checked`).each(function (i) {
 
                          if ($(this).val() == 'true') {
-                             UpdateData(e, 6);
+                             UpdateData(e, 6,"");
 
                          } else {
-                             UpdateData(e, 2);
+                             UpdateData(e, 2,"");
                          }
                 });
 
@@ -4739,14 +4800,16 @@ ${row}
                     $("button[name=btnSave]").prop("disabled", true);
                     $("button[name=btnSubmit]").prop("disabled", true);
                     $("button[name=btnMgrSubmit]").prop("disabled", true);
-                    UpdateData(e, 4);
+                    UpdateData(e, 4,"");
                 }
 
             });
-            function UpdateData(e,workFlowId) {
+            function UpdateData(e,workFlowId,btnSave) {
                  e.stopImmediatePropagation();
                 var data = new FormData();
                 //HeaderReport
+                data.append("btnSave", btnSave);
+
                 data.append("NcrNo", $('#NcrNo').val());
                 data.append("DateOpened", $('#HeaderDateOpened').val());
                 data.append("DateTargetedClosure", $('#HeaderDateTargetedClosure').val());
@@ -4895,6 +4958,7 @@ ${row}
                         data.append("d2_attachmentFailures", files[i]);
                     }
                 }
+               
 
                 var chkD2SupSupplier = $("#D2_SupSupplier").is(":checked");
                 if (chkD2SupSupplier) {

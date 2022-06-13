@@ -1,6 +1,7 @@
 ﻿using _8DSystem.Models;
 using _8DSystem.Models.Views;
 using _8DSystem.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace _8DSystem.Controllers
 {
+    [Authorize(Roles = "Admin, User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -49,19 +51,23 @@ namespace _8DSystem.Controllers
             return View(reportHeader);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(ReportHeader reportHeader, List<IFormFile> d0_attachments, List<IFormFile> d2_attachments, List<IFormFile> d3_attachments, List<IFormFile> d4_attachments, List<IFormFile> d5_attachments, List<IFormFile> d6_attachments, List<IFormFile> d7_attachments, List<IFormFile> d8_attachments, List<IFormFile> d2_attachmentRecurrings, List<IFormFile> d2_attachmentFailures, List<IFormFile> d2_ConformAttachments, List<IFormFile> d2_NonConformAttachments, string btnClick)
+        public async Task<IActionResult> Edit(ReportHeader reportHeader, List<IFormFile> d0_attachments, List<IFormFile> d2_attachments, List<IFormFile> d3_attachments, List<IFormFile> d4_attachments, List<IFormFile> d5_attachments, List<IFormFile> d6_attachments, List<IFormFile> d7_attachments, List<IFormFile> d8_attachments, List<IFormFile> d2_attachmentRecurrings, List<IFormFile> d2_attachmentFailures, List<IFormFile> d2_ConformAttachments, List<IFormFile> d2_NonConformAttachments, string btnSave)
         {
             try
             {
                 //Update Report
-               
-                await _report.EditReport(reportHeader, d0_attachments,d2_attachments, d3_attachments,  d4_attachments,d5_attachments,  d6_attachments, d7_attachments, d8_attachments, d2_attachmentRecurrings,d2_attachmentFailures, d2_ConformAttachments, d2_NonConformAttachments, btnClick);
+
+                await _report.EditReport(reportHeader, d0_attachments, d2_attachments, d3_attachments, d4_attachments, d5_attachments, d6_attachments, d7_attachments, d8_attachments, d2_attachmentRecurrings, d2_attachmentFailures, d2_ConformAttachments, d2_NonConformAttachments, btnSave);
                 var report = await _report.GetReport(reportHeader.Id);
-                if (report.WorkFlow.RefStatusId == StatusId.Completed || report.WorkFlow.RefStatusId == StatusId.WaitingApprove || report.WorkFlow.RefStatusId == StatusId.Rejected || report.WorkFlow.RefStatusId == StatusId.MgrApproved)
-                {                   
-                    _notify.SendEmail(report);
+                if (report.WorkFlow.RefStatusId == StatusId.Completed || report.WorkFlow.RefStatusId == StatusId.WaitingApprove || report.WorkFlow.RefStatusId == StatusId.Rejected || report.WorkFlow.RefStatusId == StatusId.MgrApproved || report.WorkFlow.RefStatusId == StatusId.Inprocess)
+                {
+                    if (btnSave != "save")
+                    {
+                        _notify.SendEmail(report);
+
+                    }
                 }
-                
+
 
                 //return StatusCode(200, ret.Id);
                 return StatusCode(200, report.Id);
@@ -72,7 +78,7 @@ namespace _8DSystem.Controllers
             }
         }
 
-        public async Task<IActionResult>  Create()
+        public async Task<IActionResult> Create()
         {
             var refData = await _report.GetCreateReferences();
             var creator = _userService.GetCurrentEmpInfo(User.Identity.Name.Split('\\').Last());
@@ -81,7 +87,7 @@ namespace _8DSystem.Controllers
             return View(refData);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(ReportHeader reportHeader, List<IFormFile> d0_attachments, List<IFormFile> d2_attachments, List<IFormFile> d3_attachments, List<IFormFile> d4_attachments, List<IFormFile> d5_attachments, List<IFormFile> d6_attachments, List<IFormFile> d7_attachments, List<IFormFile> d8_attachments, List<IFormFile> d2_attachmentRecurrings, List<IFormFile> d2_attachmentFailures,List<IFormFile> d2_ConformAttachments, List<IFormFile> d2_NonConformAttachments)
+        public async Task<IActionResult> Create(ReportHeader reportHeader, List<IFormFile> d0_attachments, List<IFormFile> d2_attachments, List<IFormFile> d3_attachments, List<IFormFile> d4_attachments, List<IFormFile> d5_attachments, List<IFormFile> d6_attachments, List<IFormFile> d7_attachments, List<IFormFile> d8_attachments, List<IFormFile> d2_attachmentRecurrings, List<IFormFile> d2_attachmentFailures, List<IFormFile> d2_ConformAttachments, List<IFormFile> d2_NonConformAttachments)
         {
             try
             {
@@ -110,18 +116,18 @@ namespace _8DSystem.Controllers
 
             var data = await _report.GetReport(reportId);
 
-            var dataAttach = data.D0s.Where(w=>w.ReportHeaderId == reportId).ToList();
+            var dataAttach = data.D0s.Where(w => w.ReportHeaderId == reportId).ToList();
             var fileData = dataAttach.FirstOrDefault().D0_Attachments.FirstOrDefault(f => f.Id == fileId);
-           // var fileData = fileD0.Where(w => w.Id == fileId).ToList();
+            // var fileData = fileD0.Where(w => w.Id == fileId).ToList();
             return File(fileData.Content, fileData.ContentMimeType, fileData.ContentName);
 
         }
         public async Task<IActionResult> DeleteFileD0(Guid reportId, int fileId)
         {
-            
+
             try
             {
-                await _report.DeleteFileD0( reportId, fileId);
+                await _report.DeleteFileD0(reportId, fileId);
                 var ret = await _report.GetReport(reportId);
                 return RedirectToAction(nameof(Edit), new { id = reportId });
             }
@@ -133,18 +139,18 @@ namespace _8DSystem.Controllers
         }
         public async Task<FileResult> Viewfile_D2AttachmentFailures(Guid reportId, int fileId)
         {
-            
+
 
             var data = await _report.GetReport(reportId);
 
             var dataAttach = data.D2s.Where(w => w.ReportHeaderId == reportId).ToList();
-            var fileData = dataAttach.FirstOrDefault().D2_AttachmentFailures.FirstOrDefault(f => f.Id == fileId);            
+            var fileData = dataAttach.FirstOrDefault().D2_AttachmentFailures.FirstOrDefault(f => f.Id == fileId);
             return File(fileData.Content, fileData.ContentMimeType, fileData.ContentName);
 
         }
         public async Task<IActionResult> DeleteFile_D2AttachmentFailures(Guid reportId, int fileId)
         {
-           
+
             try
             {
                 await _report.DeleteFile_D2AttachmentFailures(reportId, fileId);
@@ -164,14 +170,14 @@ namespace _8DSystem.Controllers
             var data = await _report.GetReport(reportId);
 
             var dataAttach = data.D2s.Where(w => w.ReportHeaderId == reportId).ToList();
-            var fileData = dataAttach.FirstOrDefault().D2_AttachmentFailures.FirstOrDefault(f => f.Id == fileId);
-           
+            var fileData = dataAttach.FirstOrDefault().D2_AttachmentRecurrings.FirstOrDefault(f => f.Id == fileId);
+
             return File(fileData.Content, fileData.ContentMimeType, fileData.ContentName);
 
         }
         public async Task<IActionResult> DeleteFile_D2AttachmentRecurrings(Guid reportId, int fileId)
         {
-            
+
             try
             {
                 await _report.DeleteFile_D2AttachmentRecurrings(reportId, fileId);
@@ -300,7 +306,7 @@ namespace _8DSystem.Controllers
 
             var dataAttach = data.D6s.Where(w => w.ReportHeaderId == reportId).ToList();
             var fileData = dataAttach.FirstOrDefault().D6_Attachments.FirstOrDefault(f => f.Id == fileId);
-           
+
             return File(fileData.Content, fileData.ContentMimeType, fileData.ContentName);
 
         }

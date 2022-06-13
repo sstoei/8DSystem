@@ -133,6 +133,21 @@ namespace _8DSystem.Services
                     }
 
                     break;
+                case StatusId.Inprocess:
+                    MailSubject = "[8D Report] The report waiting for you review";
+                    MailMessage = "<h5>Dear "+ report.WorkFlow.ActionId +",</h5>";
+                    MailMessage += GetEmailTemplete(report);
+                    MailMessage += "<br />";
+                    MailMessage += "<div>for more information click <a href='" + setConfig["HttpRootPath"] + "Auth/Login?returnUrl=/Home/Edit/" + report.Id + "'>[Link]</a></div>";
+
+                    MailAddress = report.WorkFlow.ActionEmail;
+                    //MailCc.Add(report.CreateByEmail);
+                    if (!string.IsNullOrWhiteSpace(MailAddress))
+                    {
+                        InvokeEmail();
+                    }
+
+                    break;
             }
         }
 

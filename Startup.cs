@@ -70,7 +70,7 @@ namespace _8DSystem
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Auth}/{action=Login}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
